@@ -26,7 +26,7 @@ public class PullToZoomInDemoActivity extends ActionBarActivity {
                 "HttpClient", "DDMS", "Android Studio", "Fragment", "Loader"};
         listView.setAdapter(new ArrayAdapter<String>(PullToZoomInDemoActivity.this,
                 android.R.layout.simple_list_item_1, adapterData));
-        listView.getHeaderView().setImageResource(R.drawable.splash01);
+        listView.getHeaderView().setImageResource(R.mipmap.splash01);
         listView.getHeaderView().setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 }

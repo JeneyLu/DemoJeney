@@ -31,5 +31,6 @@
     <string name="title_activity_loading_demo">LoadingDemoActivity</string>
     <string name="title_activity_stack_view">StackViewActivity</string>
     <string name="title_activity_banner_view">BannerViewActivity</string>
+    <string name="title_activity_quick_test">QuickTestActivity</string>
 
 </resources>

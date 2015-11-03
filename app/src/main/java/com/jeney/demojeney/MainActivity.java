@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.jeney.demojeney.FlippableStackView.FlippableStackViewActivity;
 import com.jeney.demojeney.ORMLite.ORMActivity;
@@ -31,23 +33,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        DisplayMetrics metric = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels;  // 屏幕宽度（像素）
-        int height = metric.heightPixels;  // 屏幕高度（像素）
-        float density = metric.density;  // 屏幕密度（0.75 / 1.0 / 1.5）
-        int densityDpi = metric.densityDpi;  // 屏幕密度DPI（120 / 160 / 240）
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String date = sdf.format(new Date(-System.currentTimeMillis()));
-        Log.d("jeney", date);
     }
 
     @Override
     protected void onDestroy() {
         ButterKnife.unbind(this);
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_quick_test, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_quick_test:
+                Intent intent = new Intent(MainActivity.this, QuickTestActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.transfer_data_btn)

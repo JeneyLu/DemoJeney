@@ -10,4 +10,7 @@
     <color name="wisteria">#8e44ad</color>
     <color name="clouds">#ecf0f1</color>
     <color name="midnight_blue">#141d26</color>
+
+    <!--页面背景色-->
+    <color name="bgPageColor">#EEEEEE</color>
 </resources>
