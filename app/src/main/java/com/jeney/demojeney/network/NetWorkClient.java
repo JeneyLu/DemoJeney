@@ -1,14 +1,6 @@
 package com.jeney.demojeney.network;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.internal.bind.DateTypeAdapter;
-
-import java.util.Date;
-
 import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
 
 /**
  * desc:
@@ -20,12 +12,12 @@ public class NetWorkClient {
     public static StringNetWorkService stringNetWorkService;
     public static JsonNetWorkService jsonNetWorkService;
 
-    public static void initNetWorkClient(String host){
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(host)
-                .setConverter(new StringCustomConverter())
+    public static void initNetWorkClient(String host) {
+        RestAdapter stringRestAdapter = new RestAdapter.Builder().setEndpoint(host)
+                .setConverter(new CustomStringConverter())
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
-        stringNetWorkService = restAdapter.create(StringNetWorkService.class);
+        stringNetWorkService = stringRestAdapter.create(StringNetWorkService.class);
 
         RestAdapter jsonRestAdapter = new RestAdapter.Builder().setEndpoint(host)
                 .setConverter(new CustomJsonConverter())

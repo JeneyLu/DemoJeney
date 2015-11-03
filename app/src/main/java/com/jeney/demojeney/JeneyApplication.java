@@ -20,7 +20,7 @@ public class JeneyApplication extends Application {
         NetWorkClient.initNetWorkClient("http://www.baidu.com");
         //初始化数据库框架
         DatabaseHelper.getInstance(this);
-        //初始化ImageLoad而
+        //初始化ImageLoader
         JeneyImageLoader.init(getApplicationContext());
     }
 }

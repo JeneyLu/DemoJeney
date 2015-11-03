@@ -15,7 +15,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * desc:
+ * desc: 启动页
  * author: Jeney
  * email: jeneylu@anjuke.com
  * date: 2015/11/3
@@ -39,12 +39,13 @@ public class SplashActivity extends Activity {
 
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+
         animate();
     }
 
     private void animate() {
         final RotateAnimation rotateAnimation = new RotateAnimation(0.0f, 360.0f * 2, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        rotateAnimation.setDuration(1500);
+        rotateAnimation.setDuration(2000);
         rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

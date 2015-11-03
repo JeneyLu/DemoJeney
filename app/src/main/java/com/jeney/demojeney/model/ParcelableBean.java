@@ -93,12 +93,6 @@ public class ParcelableBean implements Parcelable {
         }
     };
 
-    /**
-     * desc:
-     * author: Jeney
-     * email: jeneylu@anjuke.com
-     * date: 2015/8/6
-     */
     public static class ParcelableModel implements Parcelable {
         private int id;
         private String name;

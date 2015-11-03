@@ -14,6 +14,7 @@ import com.jeney.demojeney.ORMLite.bean.Apple;
 import com.jeney.demojeney.ORMLite.db.AccountDao;
 import com.jeney.demojeney.ORMLite.db.AppleDao;
 import com.jeney.demojeney.R;
+import com.jeney.demojeney.comm.actvity.BaseActivity;
 import com.jeney.demojeney.util.ToastUtil;
 
 import java.io.Serializable;
@@ -23,20 +24,13 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ORMActivity extends AppCompatActivity {
+public class ORMActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orm_lite);
         ButterKnife.bind(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
     }
 
     @OnClick(R.id.add_data_btn)
@@ -69,6 +63,7 @@ public class ORMActivity extends AppCompatActivity {
         apple1.setAccount(account1);
         apple2.setAccount(account2);
         apple3.setAccount(account2);
+
         AppleDao appleDao = new AppleDao(this);
         appleDao.add(apple1);
         appleDao.add(apple2);
@@ -91,7 +86,6 @@ public class ORMActivity extends AppCompatActivity {
         appleDao.deleteAll();
         ToastUtil.showToast(this, "数据已全部删除");
     }
-
 
     @OnClick(R.id.test_serialize_btn)
     void testSerializeBtnOnclick() {

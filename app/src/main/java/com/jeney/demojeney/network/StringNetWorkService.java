@@ -1,6 +1,5 @@
 package com.jeney.demojeney.network;
 
-import com.jeney.demojeney.model.RequestBody;
 
 import java.util.Map;
 

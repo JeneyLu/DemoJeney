@@ -1,7 +1,7 @@
 package com.jeney.demojeney.androidLtry.RecyclerView;
 
 /**
- * desc:
+ * desc: 列表中的数据model
  * author: Jeney
  * email: jeneylu@anjuke.com
  * date: 2015/8/11

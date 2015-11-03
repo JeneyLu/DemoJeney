@@ -20,7 +20,7 @@ import java.util.Map;
  * email: jeneylu@anjuke.com
  * date: 2015/8/10
  */
-public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
+public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String DATA_BASE_NAME = "test.db";
     private Map<String, Dao> daos = new HashMap<String, Dao>();
 
@@ -41,8 +41,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
-            TableUtils.dropTable(connectionSource,Account.class,true);
-            TableUtils.dropTable(connectionSource,Apple.class,true);
+            TableUtils.dropTable(connectionSource, Account.class, true);
+            TableUtils.dropTable(connectionSource, Apple.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,18 +50,17 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
     }
 
     private static DatabaseHelper instance;
+
     /**
      * 单例获取该Helper
+     *
      * @param context
      * @return
      */
-    public static DatabaseHelper getInstance(Context context)
-    {
+    public static DatabaseHelper getInstance(Context context) {
         context = context.getApplicationContext();
-        if (instance == null)
-        {
-            synchronized (DatabaseHelper.class)
-            {
+        if (instance == null) {
+            synchronized (DatabaseHelper.class) {
                 if (instance == null)
                     instance = new DatabaseHelper(context);
             }
@@ -69,16 +68,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
         return instance;
     }
 
-    public synchronized Dao getDao(Class clazz) throws SQLException
-    {
+    public synchronized Dao getDao(Class clazz) throws SQLException {
         Dao dao = null;
         String className = clazz.getSimpleName();
-        if (daos.containsKey(className))
-        {
+        if (daos.containsKey(className)) {
             dao = daos.get(className);
         }
-        if (dao == null)
-        {
+        if (dao == null) {
             dao = super.getDao(clazz);
             daos.put(className, dao);
         }
@@ -89,11 +85,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
      * 释放资源
      */
     @Override
-    public void close()
-    {
+    public void close() {
         super.close();
-        for (String key : daos.keySet())
-        {
+        for (String key : daos.keySet()) {
             Dao dao = daos.get(key);
             dao = null;
         }

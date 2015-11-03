@@ -1,7 +1,7 @@
 package com.jeney.demojeney.model;
 
 /**
- * desc:
+ * desc: retrofit demo中的请求实体
  * author: Jeney
  * email: jeneylu@anjuke.com
  * date: 2015/8/6

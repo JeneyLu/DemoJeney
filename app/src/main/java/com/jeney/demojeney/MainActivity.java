@@ -62,21 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.transfer_data_btn)
     void transferDataBtnOnclick() {
-        //利用Intent传递ArrayList，ArrayList中的对象必须是Parcelable的
-        Intent transferDataIntent = new Intent(this, DataTransferActivity.class);
-        ArrayList<ParcelableBean> parcelableBeans = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ArrayList<String> features = new ArrayList<>();
-            ArrayList<ParcelableBean.ParcelableModel> parcelableModels = new ArrayList<>();
-            features.add("feature1");
-            features.add("feature2");
-            features.add("feature3");
-            parcelableModels.add(new ParcelableBean.ParcelableModel(i, "ParcelableModel"));
-            ParcelableBean parcelableBean = new ParcelableBean(i, "name" + i, features, parcelableModels);
-            parcelableBeans.add(parcelableBean);
-        }
-        transferDataIntent.putParcelableArrayListExtra("data", parcelableBeans);
-        startActivity(transferDataIntent);
+        startActivity(DataTransferActivity.newIntent(this));
     }
 
     @OnClick(R.id.retrofit_demo_btn)

@@ -15,7 +15,7 @@ import retrofit.mime.TypedInput;
 import retrofit.mime.TypedOutput;
 
 /**
- * desc: 自定义json转换器
+ * desc: 自定义json转换器，Json解析框架为fastjson
  * author: Jeney
  * email: jeneylu@anjuke.com
  * date: 2015/8/7

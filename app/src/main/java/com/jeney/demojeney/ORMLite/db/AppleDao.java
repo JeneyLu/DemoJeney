@@ -19,7 +19,7 @@ public class AppleDao {
     private DatabaseHelper helper;
     private Dao<Apple, Integer> appleDao;
 
-    public AppleDao(Context context){
+    public AppleDao(Context context) {
         helper = DatabaseHelper.getInstance(context);
         try {
             appleDao = helper.getDao(Apple.class);
@@ -28,7 +28,7 @@ public class AppleDao {
         }
     }
 
-    public void add(Apple apple){
+    public void add(Apple apple) {
         try {
             appleDao.createOrUpdate(apple);
         } catch (SQLException e) {
@@ -36,7 +36,7 @@ public class AppleDao {
         }
     }
 
-    public List<Apple> queryAll(){
+    public List<Apple> queryAll() {
         try {
             return appleDao.queryForAll();
         } catch (SQLException e) {
@@ -45,7 +45,7 @@ public class AppleDao {
         return null;
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         try {
             appleDao.delete(appleDao.queryForAll());
         } catch (SQLException e) {
@@ -53,7 +53,7 @@ public class AppleDao {
         }
     }
 
-    public void refresh(Apple apple){
+    public void refresh(Apple apple) {
         try {
             appleDao.refresh(apple);
         } catch (SQLException e) {

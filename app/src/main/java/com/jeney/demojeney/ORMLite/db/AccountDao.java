@@ -18,7 +18,7 @@ public class AccountDao {
     private DatabaseHelper helper;
     private Dao<Account, Integer> accountDao;
 
-    public AccountDao(Context context){
+    public AccountDao(Context context) {
         helper = DatabaseHelper.getInstance(context);
         try {
             accountDao = helper.getDao(Account.class);
@@ -27,7 +27,7 @@ public class AccountDao {
         }
     }
 
-    public void add(Account account){
+    public void add(Account account) {
         try {
             accountDao.createOrUpdate(account);
         } catch (SQLException e) {
@@ -35,7 +35,7 @@ public class AccountDao {
         }
     }
 
-    public void deleAccount(Account account){
+    public void deleAccount(Account account) {
         try {
             accountDao.delete(account);
         } catch (SQLException e) {
@@ -43,7 +43,7 @@ public class AccountDao {
         }
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         try {
             accountDao.delete(accountDao.queryForAll());
         } catch (SQLException e) {
@@ -51,7 +51,7 @@ public class AccountDao {
         }
     }
 
-    public List<Account> queryAll(){
+    public List<Account> queryAll() {
         try {
             return accountDao.queryForAll();
         } catch (SQLException e) {
@@ -60,7 +60,7 @@ public class AccountDao {
         return null;
     }
 
-    public void refresh(Account account){
+    public void refresh(Account account) {
         try {
             accountDao.refresh(account);
         } catch (SQLException e) {

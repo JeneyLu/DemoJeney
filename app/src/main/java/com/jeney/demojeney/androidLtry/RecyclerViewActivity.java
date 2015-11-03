@@ -1,5 +1,6 @@
 package com.jeney.demojeney.androidLtry;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.jeney.demojeney.R;
 import com.jeney.demojeney.androidLtry.RecyclerView.DividerItemDecoration;
 import com.jeney.demojeney.androidLtry.RecyclerView.Item;
+import com.jeney.demojeney.comm.actvity.BaseActivity;
 import com.jeney.uicomponent.CustomSwipeRefreshLayout.SwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -31,7 +33,11 @@ import butterknife.ButterKnife;
 // http://blog.csdn.net/lmj623565791/article/details/45059587
 // http://blog.csdn.net/a396901990/article/details/40153759
 
-public class RecyclerViewActivity extends ActionBarActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+/**
+ * RecyclerView 使用
+ * SwipeRefreshLayout 下拉刷新，上拉加载使用
+ */
+public class RecyclerViewActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -42,6 +48,8 @@ public class RecyclerViewActivity extends ActionBarActivity implements SwipeRefr
     private MyAdapter myAdapter;
 
     public static boolean isStagger;
+
+    private DividerItemDecoration dividerItemDecoration;
 
     private RecyclerViewMode recyclerViewMode;
 
@@ -58,6 +66,7 @@ public class RecyclerViewActivity extends ActionBarActivity implements SwipeRefr
         initView();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void initView() {
         myAdapter = new MyAdapter(items, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -71,27 +80,25 @@ public class RecyclerViewActivity extends ActionBarActivity implements SwipeRefr
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light
         );
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return super.onSupportNavigateUp();
     }
 
     private void initData() {
         items = new ArrayList<>();
-        int i = 1;
-        while (i <= 10) {
+        for (int i = 1; i < 11; i++) {
             Item item = new Item();
             item.des = "winter is coming";
             item.imageID = getImageResourceID(this, "p" + i);
             items.add(item);
-            i++;
         }
     }
 
+    /**
+     * 通过资源文件名获得资源id
+     *
+     * @param context
+     * @param name
+     * @return
+     */
     private int getImageResourceID(Context context, String name) {
         int id = context.getResources().getIdentifier(name, "mipmap", context.getPackageName());
         return id;
@@ -119,8 +126,10 @@ public class RecyclerViewActivity extends ActionBarActivity implements SwipeRefr
                 myAdapter.delete(1);
                 break;
             case R.id.divider:
-                if (recyclerViewMode == RecyclerViewMode.VERTICAL_LIST_VIEW)
-                    recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider_line), true, true));
+                if (recyclerViewMode == RecyclerViewMode.VERTICAL_LIST_VIEW && dividerItemDecoration == null)
+                    dividerItemDecoration = new DividerItemDecoration(getResources().getDrawable(R.drawable.divider_line), true, true);
+                recyclerView.removeItemDecoration(dividerItemDecoration);
+                recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider_line), true, true));
                 break;
             case R.id.vertical_list_view:
                 recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -129,15 +138,18 @@ public class RecyclerViewActivity extends ActionBarActivity implements SwipeRefr
             case R.id.horizontal_list_view:
                 recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
                 recyclerViewMode = RecyclerViewMode.OTHER;
+                recyclerView.removeItemDecoration(dividerItemDecoration);
                 break;
             case R.id.grid_view:
                 recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
                 recyclerViewMode = RecyclerViewMode.OTHER;
+                recyclerView.removeItemDecoration(dividerItemDecoration);
                 break;
             case R.id.stagger_grid_view:
                 isStagger = true;
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
                 recyclerViewMode = RecyclerViewMode.OTHER;
+                recyclerView.removeItemDecoration(dividerItemDecoration);
                 break;
             default:
                 break;

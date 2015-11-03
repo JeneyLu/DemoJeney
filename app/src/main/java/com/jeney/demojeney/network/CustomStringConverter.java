@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 
 import retrofit.converter.ConversionException;
 import retrofit.converter.Converter;
+import retrofit.mime.MimeUtil;
 import retrofit.mime.TypedInput;
 import retrofit.mime.TypedOutput;
 
@@ -15,15 +16,19 @@ import retrofit.mime.TypedOutput;
  * email: jeneylu@anjuke.com
  * date: 2015/8/6
  */
-public class StringCustomConverter implements Converter {
+public class CustomStringConverter implements Converter {
     public static final String CHARSET = "UTF-8";
 
     @Override
     public Object fromBody(TypedInput typedInput, Type type) throws ConversionException {
+        String charset = CHARSET;
+        if (typedInput.mimeType() != null) {
+            charset = MimeUtil.parseCharset(typedInput.mimeType(), CHARSET);
+        }
         try {
             //直接把服务端返回的body转换成字符串返回
-            return StreamUtils.readInputStream(typedInput.in(),CHARSET);
-        }catch (IOException exception){
+            return StreamUtils.readInputStream(typedInput.in(), charset);
+        } catch (IOException exception) {
             exception.printStackTrace();
         }
         return null;
@@ -31,7 +36,7 @@ public class StringCustomConverter implements Converter {
 
     @Override
     public TypedOutput toBody(Object o) {
-        //把客户端的请求body转换成框架需要的TypedOutput,当然请求的参数要重写toString，才能正确的拿到强求内容
+        //把客户端的请求body转换成框架需要的TypedOutput,当然请求的参数要重写toString，才能正确的拿到请求内容
         return new StringTypedOutput(o);
     }
 
