@@ -1,0 +1,36 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.jeney.demojeney.androidLtry.RecyclerViewActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group android:id="@+id/group">
+                <item
+                    android:id="@+id/add"
+                    android:title="add" />
+                <item
+                    android:id="@+id/delete"
+                    android:title="delete" />
+                <item
+                    android:id="@+id/divider"
+                    android:title="divider" />
+                <item
+                    android:id="@+id/grid_view"
+                    android:title="gridView" />
+                <item
+                    android:id="@+id/vertical_list_view"
+                    android:title="VerticalListView" />
+                <item
+                    android:id="@+id/horizontal_list_view"
+                    android:title="HorizontalListView" />
+                <item
+                    android:id="@+id/stagger_grid_view"
+                    android:title="StaggerGridView" />
+            </group>
+        </menu>
+    </item>
+</menu>

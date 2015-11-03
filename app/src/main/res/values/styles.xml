@@ -1,0 +1,103 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!--透明的activity主题-->
+    <style name="Transparent" parent="AppTheme">
+        <item name="android:windowBackground">@color/transparent_background</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--***********************************************ToolBar相关*****************************************************************-->
+    <!-- 默认的蓝色风格 -->
+    <style name="DefaultBlueTheme" parent="@style/Theme.AppCompat.NoActionBar">
+        <!-- Actionbar color -->
+        <item name="colorPrimary">@color/accent_material_dark</item>
+        <!--Status bar color-->
+        <item name="colorPrimaryDark">@color/accent_material_light</item>
+        <!--Window color-->
+        <item name="android:windowBackground">@color/dim_foreground_material_dark</item>
+        <!--toolbar左侧icon样式-->
+        <item name="toolbarNavigationButtonStyle">@style/NavigationButtonStyle</item>
+        <!--menu的actionButton的样式-->
+        <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
+        <item name="actionButtonStyle">@style/ActionButtonStyle</item>
+        <!--menu的overFlow按钮的样式-->
+        <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
+        <item name="actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
+        <!--溢出菜单的样式-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <!--下拉的ListView样式-->
+        <item name="android:dropDownListViewStyle">@style/PopupMenuListView</item>
+        <item name="dropDownListViewStyle">@style/PopupMenuListView</item>
+        <!--menu上文字大小-->
+        <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>
+        <item name="actionMenuTextAppearance">@style/MenuTextStyle</item>
+        <!--menu上文字颜色-->
+        <item name="actionMenuTextColor">#ffff0000</item>
+        <item name="android:actionMenuTextColor">#ffff0000</item>
+        <!--默认的TextView包括溢出菜单文字的大小和颜色-->
+        <item name="android:textColor">@color/yellow</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="MenuTextStyle">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="NavigationButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ActionButtonStyle" parent="@style/Widget.AppCompat.ActionButton">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="OverflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:src">@drawable/comm_bar_menu_selector</item>
+    </style>
+
+    <!--溢出菜单样式 -->
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownWidth">wrap_content</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:popupBackground">?attr/colorPrimary</item>
+        <item name="android:dropDownVerticalOffset">0dip</item>
+        <item name="android:dropDownHorizontalOffset">0dip</item>
+    </style>
+
+    <style name="PopupMenuListView" parent="@style/Widget.AppCompat.Light.ListView.DropDown">
+        <item name="android:divider">@android:color/white</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Header.TitleText" parent="android:TextAppearance.Holo">
+        <item name="android:fontFamily" tools:ignore="NewApi">sans-serif-light</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:shadowColor">#8000</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="Header.SubTitleText" parent="Header.TitleText">
+        <item name="android:fontFamily" tools:ignore="NewApi">sans-serif-condensed</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--***********************************************ToolBar相关*****************************************************************-->
+
+    <style name="DynamicToolBarActivity" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+</resources>

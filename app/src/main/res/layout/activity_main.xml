@@ -1,0 +1,142 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <Button
+            android:id="@+id/transfer_data_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transfer ArrayList" />
+
+        <Button
+            android:id="@+id/retrofit_demo_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="retrofit Demo" />
+
+        <Button
+            android:id="@+id/ormlite_demo_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ormLite Demo" />
+
+        <Button
+            android:id="@+id/recycler_view_demo_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="recycler view demo" />
+
+        <Button
+            android:id="@+id/transparent_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="transparent activity" />
+
+        <Button
+            android:id="@+id/tool_bar_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="toolbar activity" />
+
+        <Button
+            android:id="@+id/dynamic_tool_bar_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="dynamic toolbar activity" />
+
+        <Button
+            android:id="@+id/wheel_view_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="wheelview activity" />
+
+        <Button
+            android:id="@+id/progress_button_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="progress button activity" />
+
+        <Button
+            android:id="@+id/canvas_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="canvas demo activity" />
+
+        <Button
+            android:id="@+id/pull_to_zoom_in_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="pull to zoom in demo activity" />
+
+        <Button
+            android:id="@+id/sougou_browser_loading_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sougou browser loading demo activity" />
+
+        <Button
+            android:id="@+id/explosion_field_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="explosion field demo activity btn" />
+
+        <Button
+            android:id="@+id/swipe_card_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="swipe card demo activity btn" />
+
+        <Button
+            android:id="@+id/swipeable_card_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="swipeable card demo activity btn" />
+
+        <Button
+            android:id="@+id/viewpager_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="viewpager demo activity btn" />
+
+        <Button
+            android:id="@+id/loading_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="loading demo activity btn" />
+
+        <Button
+            android:id="@+id/stackview_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="stackview demo activity btn" />
+
+        <Button
+            android:id="@+id/flippable_stackview_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="flippable stackview demo activity btn" />
+
+        <Button
+            android:id="@+id/banner_view_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="banner view demo activity btn" />
+
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/heart" />-->
+    </LinearLayout>
+
+</ScrollView>

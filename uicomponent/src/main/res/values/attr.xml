@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AbstractWheelView">
+        <attr name="visibleItems" format="integer" />
+        <attr name="isAllVisible" format="boolean" />
+        <attr name="itemOffsetPercent" format="integer" />
+        <attr name="itemsPadding" format="dimension" />
+        <attr name="wheelSelectionDividerDimmedAlpha" format="integer" />
+        <attr name="wheelSelectionDividerActiveAlpha" format="integer" />
+        <attr name="wheelSelectionDivider" format="reference" />
+        <attr name="itemsDimmedAlpha" format="integer" />
+        <attr name="isCyclic" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="WheelVerticalView">
+        <attr name="wheelSelectionDividerHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="WheelHorizontalView">
+        <attr name="selectionDividerWidth" format="dimension" />
+    </declare-styleable>
+
+    <attr name="abstractWheelViewStyle" format="reference" />
+
+    <declare-styleable name="CustomProgressButton">
+        <attr name="text" format="string" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="SwipeFlingAdapterView">
+        <attr name="SwipeFlingStyle" format="reference"/>
+        <attr name="rotation_degrees" format="float"/>
+        <attr name="min_adapter_stack" format="integer"/>
+        <attr name="max_visible" format="integer"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="CardContainer">
+        <attr name="android:gravity"/>
+        <attr name="orientation" format="enum">
+            <enum name="ordered" value="0"/>
+            <enum name="disordered" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>
