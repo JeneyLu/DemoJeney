@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.jeney.demojeney.BaseWebViewActivity;
 import com.jeney.demojeney.R;
 import com.jeney.demojeney.util.ToastUtil;
 import com.jeney.demojeney.util.UIUtils;
@@ -48,7 +49,7 @@ public class BannerView implements ViewPager.OnPageChangeListener {
 
     private List<Banner> mBannerList;// 数据集
 
-    private List<View> mImageViews = new ArrayList<View>();// 图片
+    private List<View> mImageViews = new ArrayList<>();// 图片
     private LoopViewAdapter mPageViewAdapter;
     private ImageView[] mDots;// 指示点
 
@@ -75,7 +76,7 @@ public class BannerView implements ViewPager.OnPageChangeListener {
     /**
      * 获取view
      *
-     * @return
+     * @return banner布局
      */
     public RelativeLayout getBannerLayout() {
         return mBannerLayout;
@@ -84,7 +85,7 @@ public class BannerView implements ViewPager.OnPageChangeListener {
     /**
      * 更新数据集
      *
-     * @param list
+     * @param list 数据集
      */
     public void updateData(List<Banner> list) {
         mBannerList = list;
@@ -94,7 +95,7 @@ public class BannerView implements ViewPager.OnPageChangeListener {
     /**
      * 设置是否开启自动滚动,默认true
      *
-     * @param isAutoScroll
+     * @param isAutoScroll 是否自动轮播
      */
     public void setIsAutoScroll(boolean isAutoScroll) {
         this.isAutoScroll = isAutoScroll;
@@ -154,7 +155,7 @@ public class BannerView implements ViewPager.OnPageChangeListener {
                         @Override
                         public void onClick(View v) {
                             click();
-                            Log.d("jeney", "跳转吧，小Banner");
+                            mContext.startActivity(BaseWebViewActivity.newIntent(mContext,"http://www.zhihu.com/"));
                         }
                     });
                     mImageViews.add(imageView);
