@@ -133,6 +133,12 @@
             android:layout_height="wrap_content"
             android:text="banner view demo activity btn" />
 
+        <Button
+            android:id="@+id/listview_animation_demo_activity_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="listview animation demo activity btn" />
+
         <!--<ImageView-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->

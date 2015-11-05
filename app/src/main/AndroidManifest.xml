@@ -90,8 +90,12 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
-        <activity android:name=".BaseWebViewActivity"
-            android:label="BaseWebViewActivity"/>
+        <activity
+            android:name=".BaseWebViewActivity"
+            android:label="BaseWebViewActivity" />
+        <activity
+            android:name=".ListviewAnimation.ListViewAnimationActivity"
+            android:label="ListViewAnimationActivity" />
     </application>
 
 </manifest>

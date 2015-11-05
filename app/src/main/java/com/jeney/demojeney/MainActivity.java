@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jeney.demojeney.FlippableStackView.FlippableStackViewActivity;
+import com.jeney.demojeney.ListviewAnimation.ListViewAnimationActivity;
 import com.jeney.demojeney.ORMLite.ORMActivity;
 import com.jeney.demojeney.ViewPagerWithTansFormer.ViewPagerActivity;
 import com.jeney.demojeney.androidLtry.RecyclerViewActivity;
@@ -178,6 +179,12 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.banner_view_demo_activity_btn)
     void bannerViewBtnOnclick() {
         Intent intent = new Intent(this, BannerViewActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.listview_animation_demo_activity_btn)
+    void listviewAnimationBtnOnclick() {
+        Intent intent = new Intent(this, ListViewAnimationActivity.class);
         startActivity(intent);
     }
 }
