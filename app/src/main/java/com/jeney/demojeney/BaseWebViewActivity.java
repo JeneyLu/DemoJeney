@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebStorage;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.jeney.demojeney.comm.actvity.BaseActivity;
+import com.jeney.demojeney.util.NetworkUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,6 +34,8 @@ public class BaseWebViewActivity extends BaseActivity {
     @Bind(R.id.progressBar)
     ProgressBar progressBar;
 
+    private WebSettings webSettings;
+
     private String mUrl;
 
     public static Intent newIntent(Context context, String url) {
@@ -46,17 +50,31 @@ public class BaseWebViewActivity extends BaseActivity {
         mUrl = getIntent().getStringExtra(URL);
         setContentView(R.layout.activity_base_webview);
         ButterKnife.bind(this);
+
         webView.setWebViewClient(new MyWebViewClient());
-        initWebSettings();
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
         webView.setWebChromeClient(new MyWebChromeClient());
+        initWebSettings();
+
         webView.loadUrl(mUrl);
-        ButterKnife.bind(this);
     }
 
     private void initWebSettings() {
-
+        webSettings = webView.getSettings();
+        if (NetworkUtil.isNetworkAvailable(this)) {
+            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        } else {
+            webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        }
+        // 开启javascript设置
+        webSettings.setJavaScriptEnabled(true);
+        // 设置可以使用localStorage
+        webSettings.setDomStorageEnabled(true);
+        // 应用可以有数据库
+        webSettings.setDatabaseEnabled(true);
+        // 应用可以有缓存
+        webSettings.setAppCacheEnabled(true);
+        String appCacheDir = this.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
+        webSettings.setAppCachePath(appCacheDir);
     }
 
     @Override
@@ -79,8 +97,8 @@ public class BaseWebViewActivity extends BaseActivity {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
-                //noinspection ConstantConditions
-                getSupportActionBar().setTitle(title);
+            //noinspection ConstantConditions
+            getSupportActionBar().setTitle(title);
         }
 
         @Override
@@ -94,6 +112,7 @@ public class BaseWebViewActivity extends BaseActivity {
                     progressBar.setVisibility(View.VISIBLE);
                 }
         }
+
     }
 
     private class MyWebViewClient extends WebViewClient {
