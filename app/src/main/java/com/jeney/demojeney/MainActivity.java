@@ -187,4 +187,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ListViewAnimationActivity.class);
         startActivity(intent);
     }
+
+    @OnClick(R.id.draw_view_demo_activity_btn)
+    void drawViewDemoBtnOnclick(){
+        Intent intent = new Intent(this,DrawViewActivity.class);
+        startActivity(intent);
+    }
 }

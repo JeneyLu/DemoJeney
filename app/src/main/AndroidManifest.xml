@@ -97,6 +97,8 @@
         <activity
             android:name=".ListviewAnimation.ListViewAnimationActivity"
             android:label="ListViewAnimationActivity" />
+
+        <activity android:name=".DrawViewActivity"/>
     </application>
 
 </manifest>
