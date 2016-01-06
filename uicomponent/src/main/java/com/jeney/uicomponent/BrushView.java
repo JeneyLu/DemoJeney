@@ -7,6 +7,10 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.Region;
+import android.graphics.RegionIterator;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +24,8 @@ import android.view.View;
 public class BrushView extends View {
     private Paint brush = new Paint();
     private Path path = new Path();
+    private Region region = new Region();
+    private Region viewRegion = new Region();
 
     private boolean isOver;
 
@@ -33,9 +39,14 @@ public class BrushView extends View {
 
     public BrushView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initBrush();
+    }
+
+    private void initBrush(){
         brush.setAntiAlias(true);
         brush.setColor(Color.BLUE);
         brush.setStyle(Paint.Style.STROKE);
+        brush.setAntiAlias(true);
         brush.setStrokeJoin(Paint.Join.ROUND);
         brush.setStrokeWidth(10f);
     }
@@ -51,7 +62,7 @@ public class BrushView extends View {
             case MotionEvent.ACTION_MOVE:
                 path.lineTo(pointX, pointY);
                 break;
-            case MotionEvent.ACTION_POINTER_UP:
+            case MotionEvent.ACTION_UP:
                 isOver = true;
                 break;
             default:
@@ -63,17 +74,40 @@ public class BrushView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if(isOver){
+        if (isOver) {
             path.close();
+            viewRegion.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
+            region.setPath(path, viewRegion);
+            brush.setStyle(Paint.Style.FILL);
+            drawRegion(canvas, region, brush);
+        } else {
+            canvas.drawPath(path, brush);
         }
-        canvas.drawPath(path, brush);
+    }
+
+    private void drawRegion(Canvas canvas, Region rgn, Paint paint) {
+        RegionIterator iter = new RegionIterator(rgn);
+        Rect r = new Rect();
+        while (iter.next(r)) {
+            canvas.drawRect(r, paint);
+        }
+    }
+
+    public void resetView(){
+        isOver = false;
+        initBrush();
+        path.reset();
+        postInvalidate();
+    }
+
+    public boolean contains(Point point){
+        return region.contains(point.x,point.y);
     }
 
     public Bitmap getBitmap() {
-        this.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-        this.layout(0, 0, this.getMeasuredWidth(), this.getMeasuredHeight());
-        this.buildDrawingCache();
-        Bitmap bitmap = this.getDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        this.draw(canvas);
         return bitmap;
     }
 }

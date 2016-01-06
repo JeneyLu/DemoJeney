@@ -33,4 +33,9 @@ public class DrawViewActivity extends BaseActivity {
     void getBitmap() {
         imageView.setImageBitmap(brushView.getBitmap());
     }
+
+    @OnClick(R.id.clearView)
+    void clearView(){
+        brushView.resetView();
+    }
 }
