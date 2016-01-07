@@ -1,5 +1,6 @@
 package com.jeney.demojeney;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -27,6 +28,12 @@ public class DrawViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_view);
         ButterKnife.bind(this);
+        brushView.setOnFinishListener(new BrushView.OnFinishListener() {
+            @Override
+            public void onFinish(Bitmap bitmap) {
+                imageView.setImageBitmap(bitmap);
+            }
+        });
     }
 
     @OnClick(R.id.getBitmap)
@@ -35,7 +42,7 @@ public class DrawViewActivity extends BaseActivity {
     }
 
     @OnClick(R.id.clearView)
-    void clearView(){
+    void clearView() {
         brushView.resetView();
     }
 }
