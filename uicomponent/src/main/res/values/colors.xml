@@ -2,4 +2,6 @@
 <resources>
     <color name="card_bg">#EBEBEB</color>
     <color name="card_outline">#D0D0CE</color>
+
+    <color name="light_blue">#880000FF</color>
 </resources>

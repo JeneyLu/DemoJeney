@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -15,23 +14,33 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.jeney.uicomponent.util.UIUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * desc:
+ * desc:画圈圈自定义View
  * author: Jeney
  * email: jeneylu@anjuke.com
  * date: 2016/1/6
  */
 public class BrushView extends View {
+    private static final int BLOD_STROKE_WITH = 200;
+    private static final int STRAIGHT_LINE_OFFSET = 50;
+    //画笔
     private Paint brush = new Paint();
+    //画笔路径
     private Path path = new Path();
+    //划线的不规则区域
     private Region region = new Region();
+    //整个view的矩形区域
     private Region viewRegion = new Region();
+    //手指移动所有点的集合
     private List<FloatPoint> floatPoints = new ArrayList<>();
+    //一次画圈动作结束后的回调接口
     private OnFinishListener onFinishListener;
-
+    //一次画圈动作结束后的flag
     private boolean isOver;
 
     public BrushView(Context context) {
@@ -49,15 +58,11 @@ public class BrushView extends View {
 
     private void initBrush() {
         brush.setAntiAlias(true);
-        brush.setColor(Color.BLUE);
+        brush.setColor(getResources().getColor(R.color.light_blue));
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeCap(Paint.Cap.ROUND);
         brush.setStrokeJoin(Paint.Join.ROUND);
-        brush.setStrokeWidth(10f);
-    }
-
-    public OnFinishListener getOnFinishListener() {
-        return onFinishListener;
+        brush.setStrokeWidth(10.0f);
     }
 
     public void setOnFinishListener(OnFinishListener onFinishListener) {
@@ -80,8 +85,9 @@ public class BrushView extends View {
                         @Override
                         public void run() {
                             onFinishListener.onFinish(getBitmap());
+                            resetView();
                         }
-                    }, 500);
+                    }, 100);
                 }
                 break;
             default:
@@ -122,8 +128,10 @@ public class BrushView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         if (isOver) {
+            //画线结束后
             if (nearLine(floatPoints)) {
-                brush.setStrokeWidth(200);
+                //画的线接近一条直线，加粗画笔，画线
+                brush.setStrokeWidth(BLOD_STROKE_WITH);
                 canvas.drawPath(path, brush);
             } else {
                 FloatPoint start = floatPoints.get(0);
@@ -132,9 +140,11 @@ public class BrushView extends View {
                 region.setPath(path, viewRegion);
                 Rect rect = region.getBounds();
                 if ((Math.pow((end.x - start.x), 2) + Math.pow((end.y - start.y), 2) > (rect.height() * rect.width()))) {
-                    brush.setStrokeWidth(200);
+                    //画线的起点和终点之间距离较大，加粗画笔，画线
+                    brush.setStrokeWidth(BLOD_STROKE_WITH);
                     canvas.drawPath(path, brush);
                 } else {
+                    //画线的起点和终点之间距离较小，填充path区域
                     brush.setStyle(Paint.Style.FILL);
                     drawRegion(canvas, region, brush);
                 }
@@ -144,14 +154,24 @@ public class BrushView extends View {
         }
     }
 
+    /**
+     * canvas上画region
+     *
+     * @param canvas
+     * @param rgn
+     * @param paint
+     */
     private void drawRegion(Canvas canvas, Region rgn, Paint paint) {
-        RegionIterator iter = new RegionIterator(rgn);
+        RegionIterator iterator = new RegionIterator(rgn);
         Rect r = new Rect();
-        while (iter.next(r)) {
+        while (iterator.next(r)) {
             canvas.drawRect(r, paint);
         }
     }
 
+    /**
+     * 重置view
+     */
     public void resetView() {
         floatPoints.clear();
         isOver = false;
@@ -160,19 +180,30 @@ public class BrushView extends View {
         postInvalidate();
     }
 
+    /**
+     * 判断一系列点是否接近在一条直线上
+     *
+     * @param floatPoints
+     * @return
+     */
     private boolean nearLine(List<FloatPoint> floatPoints) {
         FloatPoint startPoint = floatPoints.get(0);
         FloatPoint endPoint = floatPoints.get(floatPoints.size() - 1);
         float t = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
         float c = (endPoint.x * startPoint.y - startPoint.x * endPoint.y) / (endPoint.x - startPoint.x);
         for (FloatPoint floatPoint : floatPoints) {
-            if (Math.abs(floatPoint.y - (t * floatPoint.x + c)) > 100) {
+            if (Math.abs(floatPoint.y - (t * floatPoint.x + c)) > UIUtils.dip2px(getContext(), STRAIGHT_LINE_OFFSET)) {
                 return false;
             }
         }
         return true;
     }
 
+    /**
+     * View转化成Bitmap
+     *
+     * @return
+     */
     public Bitmap getBitmap() {
         Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -180,8 +211,30 @@ public class BrushView extends View {
         return bitmap;
     }
 
+    /**
+     * 判断此view的parentView中的一点坐标是否在view的有色区域中
+     *
+     * @param point
+     * @return
+     */
+    public boolean contain(Point point) {
+        Bitmap bitmap = getBitmap();
+        //屏幕坐标转成Bitmap上的坐标
+        int x = point.x - getLeft();
+        int y = point.y - getTop();
+        if (x < 0 || y < 0 || x > bitmap.getWidth() || y > bitmap.getHeight()) {
+            return false;
+        }
+        int pixel = bitmap.getPixel(x, y);
+        if (pixel == Color.TRANSPARENT) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     class FloatPoint {
-        public FloatPoint(float x, float y) {
+        FloatPoint(float x, float y) {
             this.x = x;
             this.y = y;
         }
